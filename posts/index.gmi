@@ -33,3 +33,4 @@
 Unless otherwise credited all material CC BY-SA 4.0 by Ciarán Ainsworth
 
 => http://creativecommons.org/licenses/by-sa/4.0/ License
+=> atom.xml Atom feed
