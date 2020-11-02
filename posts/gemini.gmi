@@ -1,0 +1,34 @@
+# Using Gemini
+
+I've been seeing a lot of buzz lately about this whole gemini business. It seems that a lot of people are quite excited about the new protocol. I've been having a quick poke around at it and have to say I was immediately taken with it. It's got a lot of promise as a very simple textual protocol, and the simplistic, well-thought-out spec makes for easy reading. Primarily, the thing I find interesting is the clear separation of server-side responsibility (serving content) and client-side responsibility (interpreting the content). I suppose I'd just never really thought about how much reliance we have on server-side day-to-day.
+
+I thought I'd have a go at setting up my own site just as a way to keep my mind sharp. Working with XSL will dull it significantly.
+
+## Setting up the server
+
+This was the simplest thing I've ever done in my life. Forget setting up a static site, forget messing around with nginx and TLS certs. All you need is openssl, a piece of server software that meets your needs, and a real good attitude.
+
+After doing a little bit of reading around of other users' experiences, I plumped for using gemserv [1], a pleasant little server written in Rust. I loaded this onto my tiny little FreeBSD server and gave its instructions a read, the proceeded to make my certificates with the following command:
+
+```
+openssl req -x509 -newkey rsa:4096 -keyout key.rsa -out cert.pem -days 3650 -nodes -subj "/CN=*.rootkey.co.uk"
+```
+
+After that it was a simple matter of writing my changes to the config file, adding some basic files as a test, and opening up Castor [2] to view my site. That's it. No mess, no delay, just a wonderfully simple alternative to a static blog site. Beautiful.
+
+=> https://sr.ht/~int80h/gemserv/ 1 - Gemserv
+=> https://git.sr.ht/~julienxx/castor 2 - Castor
+
+## Writing
+
+I'm a big Emacs user, so it's perhaps unsurprising that I immediately reached for Emacs when looking for writing tools. Fortunately, the gemini spec is so monumentally simple that a specific mode is not needed per se, but it was nice to see that somebody has already gone to the trouble of making a fully-fledged Emacs mode for gemini markup [3]. It's been a happy little tool to write with thus far.
+
+I find the syntax pleasing to write if a little restrictive, but I'm really happy how quickly people have brought out clients that can make even this very limited markup look really nice.
+
+=> https://git.carcosa.net/jmcbray/gemini.el 3 - Gemini-mode
+
+## Thoughts
+
+There are some things that I miss about writing for the web. Well, not miss exactly, more I will need to get used to the idea of writing a different way. The first thing I find a little strange is the lack of inline links. Not a big problem, as it's simple enough to just move these to the bottom or under a paragraph. Ordered lists are a bit of an omission, but one that I'm sure I'll get over.
+
+The point I suppose is just to accept that the limitations are a part of the protocol by design and to use them as an excuse to focus on creating content rather than formatting it. That's just fine by me.
