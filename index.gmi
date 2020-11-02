@@ -1,0 +1,18 @@
+# Rootkey
+
+Welcome to my Gemini site. Sometimes I write, but it's not too common.
+
+=> ./posts/ Blog posts
+=> https://rootkey.co.uk/ My website on the web
+
+## Sometimes I write code 
+
+=> https://git.sr.ht/~sporiff Code
+
+## Sometimes I even write music
+
+=> https://tanukitunes.com/channels/ciaranainsworth/ Music
+
+## Contact me
+
+I am usually reachable via email at 'cda@rootkey.co.uk' and Freenode as 'Sporiff'.
