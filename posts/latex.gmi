@@ -1,0 +1,176 @@
+# Learning LaTeX
+
+> Please note: I do not advocate the use of LaTeX in most situations. For the majority of tasks, org-mode and Markdown will serve you much better.
+
+A little while ago I found out that one of my old undergraduate essays was being used by a university in New York as a teaching resource on a film course. This was incredibly exciting, as I had basically felt that after finishing my studies I was completely disconnected from the academic world. The work had been accessed through an old website called MoviePilot, where I had been posting some of my film-centric work as an exercise in gathering feedback (which was largely positive. The creators.co people were a very supportive community). When I went to check on this, though, it seemed the site had long since shut down.
+
+Not to worry, thinks I. The essays were all written on my old desktop computer, and I still have the hard disks for that machine. I can just grab the essay back and host it somewhere new. Unfortunately, no dice. The essay was missing. I realised with some dread that I had probably written this using the University's OneDrive for storage.
+
+> Note to self: never trust the cloud
+
+Of course, now I am no longer studying at the university my account is long gone. These essays would have been written between 2012-2015, and while I still have most of them from a dump I did of the cloud storage before I left this one was conspicuously absent. Attempting to find it in the Wayback machine proved fruitless as the search features relied on long-dead Javascript. I emailed the university, but as expected (and quite rightly so) all submissions were cleared 6 months after I left. So I was left somewhat high and dry.
+
+Fortunately for me, however, I had once sent links to some of my articles as writing samples to a writing job I was applying to. This allowed me to find the exact page I needed and - lo and behold - the Wayback Machine delivered. Okay, the images were gone, but the text was there. That was the important bit.
+
+Now that I had the text I needed to find a way to back it up. Usually, I would simply stick paste them into Libreoffice and store them as a .odt file or something similar, but it occurred to me that the much more sensible thing to do would be to store it in plain text so I could easily manipulate it at a later date if needs be. Since graduating I've mostly written in either Markdown or org-mod, and either seemed like a decent enough choice. However, as is often the case I decided to use this fiasco as an excuse to learn something new. Enter LaTeX.
+
+## What is it?
+
+For those who have never used it, LaTeX is a markup-based typesetting format which can be used to produce precise and portable document formats. It's a bit verbose and under-expressive, but what it produces is the best looking documents an amateur writer could hope for, and the most control a professional typesetter could want to wield (from what I'm told). As I say, I'd mostly been used to using org-mode by this point, but I almost always export from org to LaTeX to PDF when writing reports, so it seemed like it would be fun to actually dive into the internals of what I was pumping out when I did the old `C-c C-e lp` combo.
+
+LaTeX has a pretty steep learning curve, if I'm honest, but the documentation for most packages is pretty clear and easy to follow. Having a browse of CTAN gave me the confidence to actually pick some of this stuff up and give it a go. A little bit of DDG-fu later, and I was well on my way to getting things backed up.
+
+## This tool is amazing and I hate it
+
+LaTeX is incredible, in all honesty. For someone - like me - who spends the majority of their time looking at and writing code/plain text the idea of being able to control ever aspect of a document using commands and markup was a dream come true, and LaTeX allows you to take it several steps beyond what can be achieved using other languages like Markdown, reStructuredText, and asciidoc. Of course, this only comes through additional complexity in the markup. You are required to begin and end your own documents and play around with lots of different settings in order to get a nice looking paper out at the end.
+
+As a researcher of Japanese mythology and film, two things were of paramount importance to me: the ability to clearly write in Japanese and the ability to show images. How easy is this?
+
+Well, translation is not a problem in theory, until you discover that you need to explicitly load support for Japanese fonts in your document and then declare variables for it in order to export the characters in your document. This feels needlessly complex in all honesty, and other languages handle this just fine with no need for additional faffing. To get a simple Japanese translation footnote, you need to write something like the following:
+
+```
+\usepackage{CJKutf8}
+
+\newenvironment{Japanese}{
+  \CJKfamily{min}
+  \CJKtilde
+  \CJKnospace}{}
+
+\begin{document}
+
+\begin{CJK}{UTF8}{}
+\begin{Japanese}
+... The \textit{Ukiyo} \footnote{浮世, lit. “floating world”. A term used to
+  describe the artistic spheres of influence such as art, literature, and
+  theatre \autocite[p.48-49]{pandemonium}
+\end{Japanese}
+\end{CJK}
+\end{document}
+```
+
+If you don't do these language and font declarations, you're just going to get blank characters ¯\_(ツ)_/¯
+
+Images are usually fine... unless of course you want to do side-by-side comparisons. Then you're in for a world of hurt. A single full-width image can simple be inserted using the `graphicx` package:
+
+```
+\usepackage{graphicx}
+
+\begin{document}
+\begin{figure}
+  \includegraphics[width=\linewidth]{images/Figure 3.jpeg}
+  \caption{\citetitle{utagawa} (\citeauthor{utagawa})}
+  \label{fig:gasha1}
+\end{figure}
+\end{document}
+```
+
+However, to get two images side-by-side (something that is useful when comparing representations of art between two different media, go figure), we need to dig deeper:
+
+```
+\usepackage{graphicx}
+\usepackage[labelformat=parens]{subfig}
+\usepackage{etoolbox}
+\robustify\subref
+
+\DeclareSubrefFormat{subbold}{#1\textbf{#2}}
+\DeclareCaptionListOfFormat{subbold}{\textbf{#2}}
+\captionsetup[subfloat]{labelfont={bf},listofformat=subbold,subrefformat=subbold}
+
+\begin{document}
+
+...Children excitedly chase after foxes walking in step with one
+another, when before them a ghoulish lantern materialises out of thin air
+(Figure \subref*{sf1}).
+
+\begin{figure}
+  \centering
+  \subfloat[\centering \textit{Oiwa-San} in \textit{Pom Poko}]{\label{sf1} {\includegraphics[width=6.8cm]{images/Figure 1.jpeg} }}%
+  \qquad
+  \subfloat[\centering \citetitle{hokusai}
+  (\citeauthor{hokusai})]{\label{sf2}{\includegraphics[width=5cm]{images/Figure
+        2.jpeg} }}%
+  \caption{\textit{Oiwa-San} is used to invoke traditional imagery}
+  \label{fig:figure1}%
+\end{figure}
+\end{document}
+```
+
+In this example, I need to be able to clearly reference the two images in the first figure separately, emboldening their subreferences for clear reading. While the outcome is certainly better than what you get in most other tools, this takes an inordinate amount of trial-and-error, particularly for a newcomer.
+
+## Why in the hell were we not told about this?
+
+The thing that really angered me, though, was the simplicity of referencing. Though I was a student of the arts and really didn't require a lot of the more complex mathematical/scientific functions LaTeX offers, I was nonetheless still required to reference my work. Ever tried to make a bibliography in Word? It sucks. Badly. Tools like Zotero [1] go some way to easing this pain, but in all honesty I never liked it. Before I tried LaTeX I just kind of... put up with the way Word handled it when I was using it. After LaTeX? I can never go back. Look at the following:
+
+```
+\documentclass[12pt, a4paper]{article}
+\usepackage[style=mla-new,backend=bibtex8,babel=other,bibencoding=inputenc]{biblatex}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\addbibresource{biblio.bib}
+\nocite{*}
+
+\begin{document}
+...\autocite{davisson}
+...\autocite{pandemonium}
+\printbibliography[title={Works Cited},category=cited]
+\printbibliography[title={Works Consulted},notcategory=cited]
+\end{document}
+```
+
+This wonderfully simple bit of code is simply taking a look at a file called `biblio.bib` (in my case) and assigning a new category called `cited`. Then, using the `nocite{*}` command it's telling biblatex to include all of the entries whether or not I cite them in the actual essay. Lastly, it generates two bibliographies: a works cited (in the category `cited`) and a works consulted. Then you just have a `biblio.bib` file that looks something like this:
+
+```
+@Book{davisson,
+  author =       {Zack Davisson},
+  title =        {Y{\=u}rei: The Japanese Ghost},
+  publisher =    {Chin Music Press},
+  address =      {Seattle},
+  year =         {2015},
+}
+
+@Book{gegege,
+  author =       {Shigeru Mizuki},
+  title =        {GeGeGe No Kitar{\=o} 3: Y{\=o}kai Daisens{\=o}},
+  publisher =    {Chikuma Shob{\=o}},
+  address =      {Tokyo},
+  year =         {1995},
+}
+
+@Book{pandemonium,
+  author =       {Michael Dylan Foster},
+  title =        {Pandemonium and Parade: Japanese Monsters and the Culture of Y{\=o}kai},
+  shorttitle =   {Pandemonium and Parade},
+  publisher =    {University of California Press},
+  address =      {Berkeley},
+  year =         {2009},
+}
+```
+
+With these powers combined, your output comes out to (excuse the horrible MLA-style formatting, which is just the worst):
+
+```
+Works Cited
+
+Davisson, Zack. Yūrei: The Japanese Ghost. Chin Music P, 2015.
+Foster, Michael Dylan. Pandemonium and Parade: Japanese Monsters and the Culture of Yōkai.
+U of California P, 2009.
+
+Works Consulted
+
+Mizuki, Shigeru. GeGeGe No Kitarō 3: Yōkai Daisensō. Chikuma Shobō, 1995.
+```
+
+## Was it worth it?
+
+Undoubtedly: yes. The fact that I have not only been able to recover my lost work but also improve upon its formatting significantly is invaluable to me, and I truly believe LaTeX is the best tool for the job, especially since I may look to do my PhD one day and would love to have all of my old reference files easily accessible and modifiable.
+
+I have also tried typesetting a few of my old stories into book formats with LaTeX, which is a surprisingly easy and fun way of writing. The ease with which you can change the ordering of different sections and chapters in a collected main file is an absolute lifesaver which, combined with the incredible simplicity of referencing, makes me incredibly annoyed I did my masters thesis in Word. What a waste of my time and sanity.
+
+As noted above I don't recommend LaTeX for most things. If you're looking for a really good plain text writing tool I cannot stress enough how good org-mode is. Markdown is wonderfully simple and powerful as well (although it's annoying that nobody can really agree on how it should be written since the original developer seems to want to keep it a non-standard), so either of these will be a much better choice for your day-to-day work. But for actual academic work I could see myself quickly becoming reliant on LaTeX. It's just too good at what it does to pass up. Could do with it just being able to handle Japanese text, though.
+
+## Links
+
+=> https://www.zotero.org/ [1] Zotero

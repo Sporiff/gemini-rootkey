@@ -28,6 +28,7 @@
 
 ```
 
+=> latex.gmi 2020-11-03 Learning LaTeX
 => gemini.gmi 2020-11-02 Using Gemini
 
 Unless otherwise credited all material CC BY-SA 4.0 by Ciarán Ainsworth
