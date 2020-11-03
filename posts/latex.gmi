@@ -12,7 +12,7 @@ Of course, now I am no longer studying at the university my account is long gone
 
 Fortunately for me, however, I had once sent links to some of my articles as writing samples to a writing job I was applying to. This allowed me to find the exact page I needed and - lo and behold - the Wayback Machine delivered. Okay, the images were gone, but the text was there. That was the important bit.
 
-Now that I had the text I needed to find a way to back it up. Usually, I would simply stick paste them into Libreoffice and store them as a .odt file or something similar, but it occurred to me that the much more sensible thing to do would be to store it in plain text so I could easily manipulate it at a later date if needs be. Since graduating I've mostly written in either Markdown or org-mod, and either seemed like a decent enough choice. However, as is often the case I decided to use this fiasco as an excuse to learn something new. Enter LaTeX.
+Now that I had the text I needed to find a way to back it up. Usually, I would simply stick paste them into Libreoffice and store them as a .odt file or something similar, but it occurred to me that the much more sensible thing to do would be to store it in plain text so I could easily manipulate it at a later date if needs be. Since graduating I've mostly written in either Markdown or org-mode, and either seemed like a decent enough choice. However, as is often the case I decided to use this fiasco as an excuse to learn something new. Enter LaTeX.
 
 ## What is it?
 
