@@ -13,6 +13,10 @@ Welcome to my Gemini site. Sometimes I write, but it's not too common.
 
 => https://tanukitunes.com/channels/ciaranainsworth/ Music
 
+## Still more rarely, I write academic stuff
+
+=> ./papers My research papers
+
 ## Contact me
 
 => mailto:cda@rootkey.co.uk Email Me
