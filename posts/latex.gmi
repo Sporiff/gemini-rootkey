@@ -174,3 +174,5 @@ As noted above I don't recommend LaTeX for most things. If you're looking for a 
 ## Links
 
 => https://www.zotero.org/ [1] Zotero
+
+=> ../ Back to posts

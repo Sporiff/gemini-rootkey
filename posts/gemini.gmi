@@ -32,3 +32,5 @@ I find the syntax pleasing to write if a little restrictive, but I'm really happ
 There are some things that I miss about writing for the web. Well, not miss exactly, more I will need to get used to the idea of writing a different way. The first thing I find a little strange is the lack of inline links. Not a big problem, as it's simple enough to just move these to the bottom or under a paragraph. Ordered lists are a bit of an omission, but one that I'm sure I'll get over.
 
 The point I suppose is just to accept that the limitations are a part of the protocol by design and to use them as an excuse to focus on creating content rather than formatting it. That's just fine by me.
+
+=> ../ Back to posts
