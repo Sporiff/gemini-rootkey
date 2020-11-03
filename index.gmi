@@ -15,7 +15,7 @@ Welcome to my Gemini site. Sometimes I write, but it's not too common.
 
 ## Still more rarely, I write academic stuff
 
-=> ./papers My research papers
+=> ./papers/index.gmi My research papers
 
 ## Contact me
 
