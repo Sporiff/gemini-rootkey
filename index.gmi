@@ -15,8 +15,6 @@ Welcome to my Gemini site. Sometimes I write, but it's not too common.
 
 ## Contact me
 
-I am usually reachable via email at 'cda@rootkey.co.uk' and Freenode as 'Sporiff'.
-
 => mailto:cda@rootkey.co.uk Email Me
 => xmpp://sanpei@members.fsf.org Chat With Me
 => irc://chat.freenode.net/sporiff Find Me On IRC
