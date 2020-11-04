@@ -1,0 +1,1 @@
+gemini://rootkey.co.uk/posts/atom.xml
