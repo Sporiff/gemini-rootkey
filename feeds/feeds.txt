@@ -1,1 +1,3 @@
 gemini://rootkey.co.uk/posts/atom.xml
+gemini://drewdevault.com/feed.xml
+gemini://tilde.team/~ew0k/atom.xml
