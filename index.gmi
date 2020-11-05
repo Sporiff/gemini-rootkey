@@ -2,8 +2,9 @@
 
 Welcome to my Gemini site. Sometimes I write, but it's not too common.
 
-=> ./posts/ Blog posts
+=> ./posts/index.gmi Blog posts
 => https://rootkey.co.uk/ My website on the web
+=> ./feeds/index.gmi Feeds I follow
 
 ## Sometimes I write code 
 
