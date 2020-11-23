@@ -1,0 +1,54 @@
+# Swagger for Fun
+
+I've recently been working with our DevOps lead to come up with a new mechanism for integrations. Currently, the company is using a particularly awful combination of an outdated version of Talend, an XSL translation layer, a quartz cron-based timer, and a series of bizarro API calls and stored procedures to perform actions. This is not really fit for the modern age, so we've been doing some work on a proof of concept using Python and AWS Lambdas for standardized data imports.
+
+Now, the DevOps lead is far better with both Python and AWS than I, so I've mostly just been acting as an advisor on the API while he worked on the code and deployment. While I had previously written some documentation for the endpoint in question, it struck me that it would probably be more useful to write up a Swagger document so we could use a Swagger parser to verify the structure of the call. So, off goes I to do this.
+
+Many gruelling hours and 29 endpoints later, I have had to call it a day.
+
+## Wait, is Swagger Hard?
+
+Absolutely not. Swagger and the OpenAPI 3 spec are wonderfully simple to grok and some very simple parameters create lovely interactive API docs. I was able to document these 29 endpoints in the time it took me to write about 10 of them manually.
+
+## So What's the Problem?
+
+Quite simply: we do not conform to the spec.
+
+I didn't think it was possible for an API to be so poorly structured. Quite frankly, it's mind-boggling how badly we have shat upon the very idea of APIs in how some are structured. A couple of key examples:
+
+An object declaration that sits outside of the object with no quotation marks and an equals symbol instead of a colon:
+
+```
+object={
+  "objects": [
+              {
+                "item1": ""
+                "item2": ""
+                "item3": ""
+              }
+      ]
+}
+```
+
+An array that is only an array if multiple objects are present, otherwise it is an object:
+
+```
+"array": [
+           {
+           },
+           {
+           }
+         ]
+
+"array": {}
+```
+
+And multiple examples of incorrectly formatted dates such as:
+
+* dd-mmm-yyyy hh:mm:ss
+* mm-dd-yyyy hh:mm:ss
+* dd-MMM-yyyy
+
+## Will it Ever Be Fixed?
+
+Well, I'm known to be a particularly angry and forceful employee. I am hoping that showing how the atrocity that is our API layer is breaking the standard toolkit will be the boot up the arse the company needs to fix these fucking things.

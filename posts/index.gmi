@@ -28,6 +28,7 @@
 
 ```
 
+=> swagger.gmi 2020-11-23 Swagger for Fun 
 => latex.gmi 2020-11-03 Learning LaTeX
 => gemini.gmi 2020-11-02 Using Gemini
 
